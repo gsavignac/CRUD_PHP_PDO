@@ -34,6 +34,10 @@ Para poder conectarte a la base de datos, se debe modificar el archivo de consta
 
 En el directorio raíz del sistema se encuentra el archivo **CRUD.backup** y **CRUD.sql** los cuales permitiran restaurar la base de datos del sistema. Se puede utilizar cualquier de los dos.
 
+### Acceder al sistema
+
+**Usuario:** admin
+**Clave:** admin
 
 ## estructura de directorios
 
