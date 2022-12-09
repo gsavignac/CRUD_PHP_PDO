@@ -1,0 +1,27 @@
+.cargando{
+    background-color: #EEEEEE;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    line-height: 100vh;
+    display: none;
+}
+.cargando img{
+	width: 200px;
+	max-height: 100%;
+}
+.load_table img{
+    width: 100px;
+    max-height: 100%;
+}
+
+/* login  */
+
+.login-container{
+    margin:  auto;
+    margin-top: 10%;
+    width: 400px;
+}
