@@ -23,7 +23,7 @@ Para instalar el sistema necesitas tener:
 Para poder conectarte a la base de datos, se debe modificar el archivo de constantes que se encuentra en el directorio **config/constantes.php**
 
 ```
-	define("BD","CRUD");
+    define("BD","CRUD");
     define("SERVIDOR","localhost");
     define("USUARIO","postgres");
     define("CLAVE","123456");
@@ -55,14 +55,14 @@ En el directorio raíz del sistema se encuentra el archivo **CRUD.backup** y **C
 Los módulos contienen un directorio para las clases, uno para las validaciones de Javascript y la vista
 
 ```
-	modules/
-		prueba/
-			class/
-				prueba.php
-			js/
-				pruebas.js
-			view/
-				pruebas.php
+modules/
+	prueba/
+		class/
+			prueba.php
+		js/
+			prueba.js
+		view/
+			prueba.php
 ```
 
 Cabe recordar que este es un proyecto muy básico en PHP y que carece de funcionalidades más compleja que podrian ayudar a que los procesos sean más eficientes, pero se puede prestar para aprender un poco como manejar los procesos de un CRUD en PHP y crear nuevos proyectos a partir de aqui.
