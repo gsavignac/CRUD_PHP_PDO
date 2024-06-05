@@ -54,7 +54,7 @@ if($_SESSION['username'] =='' || $_SESSION['username'] ==  null){
 </nav>
 
 <div class="cargando">
-    <img src="img/loading3.gif" alt="">
+    <img src="img/loading.gif" alt="">
 </div>
 
 <section class="container-fluid" id="cuerpo">
