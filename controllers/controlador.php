@@ -2,7 +2,7 @@
 
 /** Archivo que actua como puente entre la vista y las clases del sistema **/
 
-ini_set("display_errors",1);/* opcion para mostrar u ocultar errores de php */
+ini_set("display_errors",0);/* opcion para mostrar u ocultar errores de php */
 $respuesta = array();/* se inicializa un arreglo recibir los resultados de la consultas */
 $resp = array();/* arreglo que sera retornado con las respuestas de las operaciones */
 
@@ -15,25 +15,39 @@ if($class_name!="" && $method!="")
 {
 	@include_once "../config/constantes.php";/* incluimos las constantes de conexion */
 	@include_once "../class/class_conexion.php";/* incluimos la clase conexion */
-	@include_once "../modules/$class_name/class/$class_name.php";/* incluimos la clase recibida */
-	
-	$conexion = new Conexion(SERVIDOR,PUERTO,BD,USUARIO,CLAVE); /* creamos la conexion a la base de datos */
-	$objeto = new $class_name($parametros);/* creamos un objeto de la clase */
-	$respuesta = $objeto->$method($conexion);/* ejecutamos el metodo seleccionado y rrecibimos una respuesta */
 
-	if($respuesta)/* respondemos si la accion se ejecuto con exito */
-	{
-		$resp["success"] = true;
-		$resp["message"] = "Operacion exitosa";
-		$resp["data"] = $respuesta;
-	}else{/* respondemos si la accion no se ejecuto */
+	if(!file_exists("../modules/$class_name/class/$class_name.php")){ /* verificando si existe el archivo de la clase seleccionada */
+
 		$resp["success"] = false;
-		$resp["message"] = "Error al realizar la operacion";
+		$resp["message"] = "Error, no se encontro la ruta del archivo seleccionado para procesar los datos. << $class_name >>";
 		$resp["data"] = $respuesta;
-		$resp["error"] = $conexion->msg_error; // se trae el erro desde postgres
-	}
+		$resp["error"] = "Error, no se encontro la ruta del archivo seleccionado para procesar los datos. << $class_name >>";
 
-	$conexion->Desconectar($conexion);/* cerramos la conexion con la base de datos */
+		
+	}else{
+
+		@include_once "../modules/$class_name/class/$class_name.php";/* incluimos la clase recibida */
+
+		$conexion = new Conexion(SERVIDOR,PUERTO,BD,USUARIO,CLAVE); /* creamos la conexion a la base de datos */
+		$objeto = new $class_name($parametros);/* creamos un objeto de la clase */
+		$respuesta = $objeto->$method($conexion);/* ejecutamos el metodo seleccionado y rrecibimos una respuesta */
+
+		if($respuesta)/* respondemos si la accion se ejecuto con exito */
+		{
+			$resp["success"] = true;
+			$resp["message"] = "Operacion exitosa";
+			$resp["data"] = $respuesta;
+		}else{/* respondemos si la accion no se ejecuto */
+			$resp["success"] = false;
+			$resp["message"] = "Error al realizar la operacion";
+			$resp["data"] = $respuesta;
+			$resp["error"] = $conexion->msg_error; // se trae el erro desde postgres
+		}
+
+		$conexion->Desconectar($conexion);/* cerramos la conexion con la base de datos */
+
+	}
+		
 
 }else{
 	/* si se reciven valores vacios en los parametros obligatorios */
@@ -41,6 +55,7 @@ if($class_name!="" && $method!="")
 	$resp["success"] = false;
 	$resp["message"] = "Error, Se han enviado parametros vacios.";
 }
+
 	header('Content-type: application/json; charset=utf-8');
 	/* retornamos la respuesta en formato JSON */
 	echo json_encode($resp);

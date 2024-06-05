@@ -2,7 +2,7 @@
 
 /** Archivo que actua como puente entre la vista y las clases del sistema **/
 
-ini_set("display_errors",1);/* opcion para mostrar u ocultar errores de php */
+ini_set("display_errors",0);/* opcion para mostrar u ocultar errores de php */
 $respuesta = array();/* se inicializa un arreglo recibir los resultados de la consultas */
 $resp = array();/* arreglo que sera retornado con las respuestas de las operaciones */
 
